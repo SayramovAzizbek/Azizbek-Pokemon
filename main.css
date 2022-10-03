@@ -1,0 +1,42 @@
+body {
+    background-color: springgreen !important;
+}
+
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+}
+
+.pokemon-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 350px;
+}
+
+.pokemon-num {
+    position: absolute;
+    top: 0;
+
+}
+
+.pokemon-span-time {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.pokemons-box {
+    padding-top: 100px;
+}
+
+.pokemon-candy {
+    color: yellow;
+}
+
+.pokemon-main-img {
+    margin-bottom: 50px;
+}
