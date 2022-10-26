@@ -45,10 +45,6 @@ function pokemonRender(pokemons, titleRegex = "") {
     clonePokemonTemplate.querySelector(".pokemon-candy-count").textContent =
       pokemon.candy_count;
 
-    // if (pokemon.candy_count == undefined) {
-
-    // }
-
     clonePokemonTemplate.querySelector(
       ".pokemon-weight"
     ).textContent = `${pokemon.weight} kg`;
@@ -67,16 +63,26 @@ function searchPokemonSubmit(evt) {
   const searchPokemonFiltered = pokemons.filter((item) =>
     item.name.match(searchElement)
   );
+
+  const candCount = pokemons.filter((item) => item.candy_count);
+
   sortPokemonWeakness(searchPokemonFiltered);
   pokemonRender(searchPokemonFiltered, searchElement);
-  if (searchPokemonFiltered.length > 0) {
-    sortPokemonList(searchPokemonFiltered, sortSelectPokemons.value);
-    pokemonRender(searchPokemonFiltered, searchElement);
+  if (
+    sortSelectPokemons.value == "candyCountOld" ||
+    sortSelectPokemons.value == "candyCountNew"
+  ) {
+    sortPokemonList(candCount, sortSelectPokemons.value);
+    pokemonRender(candCount, searchElement);
   } else {
-    alert("Pokemon you wanted is not found");
+    if (searchPokemonFiltered.length > 0) {
+      sortPokemonList(searchPokemonFiltered, sortSelectPokemons.value);
+      pokemonRender(searchPokemonFiltered, searchElement);
+    } else {
+      alert("Pokemon you wanted is not found");
+    }
   }
 }
-
 seachPokemonForm.addEventListener("submit", searchPokemonSubmit);
 
 const pokemonWeakness = [];
@@ -134,23 +140,23 @@ function sortPokemonList(sortedArr, sortType) {
 }
 
 // ! Changed Pokemon Object
-const changedPokemonCard = pokemons.map((pokemon) => {
-  return {
-    id: pokemon.id,
-    num: pokemon.num,
-    name: pokemon.name,
-    img: pokemon.img,
-    type: pokemon.type,
-    height: pokemon.height.split(" ")[0],
-    weight: pokemon.weight.split(" ")[0],
-    candy: pokemon.candy,
-    candy_count: pokemon.candy_count,
-    egg: pokemon.egg,
-    spawn_chance: pokemon.spawn_chance,
-    avg_spawns: pokemon.avg_spawns,
-    spawn_time: pokemon.spawn_time,
-    multipliers: pokemon.multipliers,
-    weaknesses: pokemon.weaknesses,
-    next_evolution: pokemon.next_evolution,
-  };
-});
+// const changedPokemonCard = pokemons.map((pokemon) => {
+//   return {
+//     id: pokemon.id,
+//     num: pokemon.num,
+//     name: pokemon.name,
+//     img: pokemon.img,
+//     type: pokemon.type,
+//     height: Number(pokemon.height.split(" ")[0]),
+//     weight: Number(pokemon.weight.split(" ")[0]),
+//     candy: pokemon.candy,
+//     candy_count: pokemon.candy_count,
+//     egg: pokemon.egg,
+//     spawn_chance: pokemon.spawn_chance,
+//     avg_spawns: pokemon.avg_spawns,
+//     spawn_time: pokemon.spawn_time,
+//     multipliers: pokemon.multipliers,
+//     weaknesses: pokemon.weaknesses,
+//     next_evolution: pokemon.next_evolution,
+//   };
+// });
